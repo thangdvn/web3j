@@ -557,6 +557,7 @@ public class WebSocketService implements Web3jService {
                                 request.getOnReply()
                                         .completeExceptionally(
                                                 new IOException("Connection was closed")));
+        requestForId.clear();
     }
 
     private void closeOutstandingSubscriptions() {
@@ -567,6 +568,7 @@ public class WebSocketService implements Web3jService {
                                 subscription
                                         .getSubject()
                                         .onError(new IOException("Connection was closed")));
+        subscriptionForId.clear();
     }
 
     // Method visible for unit-tests
