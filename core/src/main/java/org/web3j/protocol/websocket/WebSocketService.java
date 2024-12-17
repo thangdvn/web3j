@@ -299,7 +299,7 @@ public class WebSocketService implements Web3jService {
             }
 
             sendReplyToListener(request, reply);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             sendExceptionToListener(replyStr, request, e);
         }
     }
@@ -322,7 +322,7 @@ public class WebSocketService implements Web3jService {
             }
 
             sendReplyToListener(webSocketRequests, new BatchResponse(requests, responses));
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             sendExceptionToListener(replyStr, webSocketRequests, e);
         }
     }
@@ -375,7 +375,7 @@ public class WebSocketService implements Web3jService {
     }
 
     private void sendExceptionToListener(
-            String replyStr, WebSocketRequest request, IllegalArgumentException e) {
+            String replyStr, WebSocketRequest request, Exception e) {
         request.getOnReply()
                 .completeExceptionally(
                         new IOException(
