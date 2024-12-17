@@ -12,7 +12,6 @@
  */
 package org.web3j.tx;
 
-import java.io.IOException;
 import java.math.BigInteger;
 
 import org.junit.jupiter.api.BeforeEach;

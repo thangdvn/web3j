@@ -75,12 +75,12 @@ public abstract class ResponseTester {
             }
 
             return new okhttp3.Response.Builder()
-                            .body(ResponseBody.create(jsonResponse, JSON_MEDIA_TYPE))
-                            .request(chain.request())
-                            .protocol(Protocol.HTTP_2)
-                            .code(200)
-                            .message("")
-                            .build();
+                    .body(ResponseBody.create(jsonResponse, JSON_MEDIA_TYPE))
+                    .request(chain.request())
+                    .protocol(Protocol.HTTP_2)
+                    .code(200)
+                    .message("")
+                    .build();
         }
     }
 }

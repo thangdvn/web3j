@@ -104,12 +104,12 @@ public abstract class BatchTester {
             }
 
             return new okhttp3.Response.Builder()
-                            .request(chain.request())
-                            .protocol(Protocol.HTTP_2)
-                            .code(200)
-                            .body(ResponseBody.create(jsonResponse, JSON_MEDIA_TYPE))
-                            .message("")
-                            .build();
+                    .request(chain.request())
+                    .protocol(Protocol.HTTP_2)
+                    .code(200)
+                    .body(ResponseBody.create(jsonResponse, JSON_MEDIA_TYPE))
+                    .message("")
+                    .build();
         }
 
         public void setJsonResponse(String jsonResponse) {

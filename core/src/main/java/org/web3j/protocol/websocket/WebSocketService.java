@@ -374,8 +374,7 @@ public class WebSocketService implements Web3jService {
         request.getOnReply().complete(reply);
     }
 
-    private void sendExceptionToListener(
-            String replyStr, WebSocketRequest request, Exception e) {
+    private void sendExceptionToListener(String replyStr, WebSocketRequest request, Exception e) {
         request.getOnReply()
                 .completeExceptionally(
                         new IOException(

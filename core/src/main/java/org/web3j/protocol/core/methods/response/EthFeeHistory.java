@@ -15,7 +15,6 @@ package org.web3j.protocol.core.methods.response;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -76,9 +75,7 @@ public class EthFeeHistory extends Response<EthFeeHistory.FeeHistory> {
             return reward.stream()
                     .map(
                             rewardPercentile ->
-                                    rewardPercentile.stream()
-                                            .map(Numeric::decodeQuantity)
-                                            .toList())
+                                    rewardPercentile.stream().map(Numeric::decodeQuantity).toList())
                     .toList();
         }
 

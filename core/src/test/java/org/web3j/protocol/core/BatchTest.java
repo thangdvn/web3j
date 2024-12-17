@@ -86,8 +86,8 @@ class BatchTest extends BatchTester {
         assertTrue(response.getResponses().get(1) instanceof Web3Sha3);
         Web3Sha3 web3Sha3 = (Web3Sha3) response.getResponses().get(1);
         assertEquals(
-			"0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad",
-			web3Sha3.getResult());
+                "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad",
+                web3Sha3.getResult());
 
         assertTrue(response.getResponses().get(2) instanceof NetVersion);
         NetVersion netVersion = (NetVersion) response.getResponses().get(2);
