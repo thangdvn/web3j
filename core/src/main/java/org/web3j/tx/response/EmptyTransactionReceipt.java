@@ -28,7 +28,7 @@ public class EmptyTransactionReceipt extends TransactionReceipt {
         super();
         this.setTransactionHash(transactionHash);
     }
-    
+
     private UnsupportedOperationException unsupportedOperation() {
         return new UnsupportedOperationException(
                 "Empty transaction receipt, only transaction hash is available");

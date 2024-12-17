@@ -120,7 +120,7 @@ public class SolidityFunctionWrapper extends Generator {
                     + "or the "
                     + SolidityFunctionWrapperGenerator.class.getName()
                     + " in the \n"
-                    + "<a href=\"https://github.com/hyperledger/web3j/tree/main/codegen\">"
+                    + "<a href=\"https://github.com/hyperledger-web3j/web3j/tree/main/codegen\">"
                     + "codegen module</a> to update.\n";
 
     private final boolean useNativeJavaTypes;
@@ -422,8 +422,7 @@ public class SolidityFunctionWrapper extends Generator {
             String name,
             List<NamedTypeName> parameters,
             Map<String, Integer> eventsCount,
-            AbiDefinition event
-    ) {
+            AbiDefinition event) {
 
         CodeBlock initializer = buildVariableLengthEventInitializer(name, parameters);
 
@@ -460,8 +459,7 @@ public class SolidityFunctionWrapper extends Generator {
                 methodSpecs.addAll(buildFunctions(functionDefinition, useUpperCase));
             } else if (functionDefinition.getType().equals(TYPE_EVENT)) {
                 methodSpecs.addAll(
-                        buildEventFunctions(functionDefinition, classBuilder, eventsCount)
-                );
+                        buildEventFunctions(functionDefinition, classBuilder, eventsCount));
             }
         }
         return methodSpecs;
@@ -1955,8 +1953,7 @@ public class SolidityFunctionWrapper extends Generator {
     List<MethodSpec> buildEventFunctions(
             AbiDefinition functionDefinition,
             TypeSpec.Builder classBuilder,
-            Map<String, Integer> eventsCount
-    )
+            Map<String, Integer> eventsCount)
             throws ClassNotFoundException {
         List<AbiDefinition.NamedType> inputs = functionDefinition.getInputs();
 
@@ -1985,9 +1982,8 @@ public class SolidityFunctionWrapper extends Generator {
 
         String functionName = functionDefinition.getName();
 
-        classBuilder.addField(createEventDefinition(
-                functionName, parameters, eventsCount, functionDefinition
-        ));
+        classBuilder.addField(
+                createEventDefinition(functionName, parameters, eventsCount, functionDefinition));
 
         functionName = functionDefinition.getName();
 

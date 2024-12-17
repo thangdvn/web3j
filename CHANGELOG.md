@@ -21,7 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### BREAKING CHANGES
 
-*
+* Change organization name [#2131](https://github.com/hyperledger-web3j/web3j/pull/2131)
 
 # [4.12.2](https://github.com/hyperledger/web3j/releases/tag/v4.12.2) (2024-09-18)
 
