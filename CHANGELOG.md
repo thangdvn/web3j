@@ -9,6 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * fixed several code issues found by sonar [#2113](https://github.com/hyperledger/web3j/pull/2113)
 * update GitHub actions versions [#2114](https://github.com/hyperledger/web3j/pull/2114)
+* fixed subscription object leaking after disconnect [#2121](https://github.com/hyperledger/web3j/pull/2121)
 
 ### Features
 
