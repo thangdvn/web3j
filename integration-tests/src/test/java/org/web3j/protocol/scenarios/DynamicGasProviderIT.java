@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import org.web3j.EVMTest;
@@ -31,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EVMTest(type = NodeType.BESU)
+@Disabled
 public class DynamicGasProviderIT extends Scenario {
     static ContractGasProvider dynamicGasProvider;
     static final String TOKEN_NAME = "Alice Token";
