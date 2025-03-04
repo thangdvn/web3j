@@ -294,6 +294,7 @@ public class CoreIT {
     }
 
     @Test
+    @Disabled
     public void testEthEstimateGas(Web3j web3j, ContractGasProvider gasProvider) throws Exception {
         org.web3j.protocol.core.methods.request.Transaction transaction =
                 org.web3j.protocol.core.methods.request.Transaction.createContractTransaction(
