@@ -118,7 +118,7 @@ Java:
 <dependency>
   <groupId>org.web3j</groupId>
   <artifactId>core</artifactId>
-  <version>4.12.2</version>
+  <version>4.13.0</version>
 </dependency>
 ```
 
@@ -131,7 +131,7 @@ Android:
 <dependency>
   <groupId>org.web3j</groupId>
   <artifactId>core</artifactId>
-  <version>4.8.9-android</version>
+  <version>4.12.3-android</version>
 </dependency>
 ```
 
@@ -141,13 +141,13 @@ Gradle
 Java:
 
 ```groovy
-implementation ('org.web3j:core:4.12.2')
+implementation ('org.web3j:core:4.13.0')
 ```
 
 Android:
 
 ```groovy
-implementation ('org.web3j:core:4.8.9-android')
+implementation ('org.web3j:core:4.12.3-android')
 ```
 
 Build instructions
