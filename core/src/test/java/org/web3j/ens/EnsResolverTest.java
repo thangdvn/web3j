@@ -281,13 +281,58 @@ class EnsResolverTest {
     }
 
     @Test
-    void buildRequestWhenNotValidUrl() {
+    void buildRequestWithDataParameterOnly() throws Exception {
         String url = "https://example.com/gateway/{data}.json";
         sender = "0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8";
         data = "0xd5fa2b00";
 
-        assertThrows(
-                EnsResolutionException.class, () -> ensResolver.buildRequest(url, sender, data));
+        okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
+        
+        assertEquals("https://example.com/gateway/0xd5fa2b00.json", request.url().toString());
+        assertEquals("GET", request.method());
+        assertNull(request.body());
+    }
+
+    @Test
+    void buildRequestWithSenderParameterOnly() throws Exception {
+        String url = "https://example.com/gateway/{sender}/lookup";
+        sender = "0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8";
+        data = "0xd5fa2b00";
+
+        okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
+        
+        assertEquals("https://example.com/gateway/0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8/lookup", 
+                request.url().toString());
+        assertEquals("POST", request.method());
+        assertNotNull(request.body());
+        assertEquals("application/json", request.header("Content-Type"));
+    }
+
+    @Test
+    void verifyPostRequestBodyContainsSenderAndData() throws Exception {
+        String url = "https://example.com/gateway/lookup";
+        sender = "0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8";
+        data = "0xd5fa2b00";
+
+        okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
+        assertNotNull(request.body());
+        okhttp3.MediaType contentType = request.body().contentType();
+        assertNotNull(contentType);
+        assertTrue(contentType.toString().startsWith("application/json"));
+    }
+
+    @Test
+    void buildRequestWithBothParameters() throws Exception {
+        String url = "https://example.com/gateway/{sender}/{data}";
+        sender = "0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8";
+        data = "0xd5fa2b00";
+
+        okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
+        
+        assertEquals("https://example.com/gateway/0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8/0xd5fa2b00", 
+                request.url().toString());
+        assertEquals("GET", request.method());
+        assertNull(request.body());
     }
 
     @Test
