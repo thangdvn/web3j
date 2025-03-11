@@ -344,19 +344,27 @@ public class EnsResolver {
         if (data == null) {
             throw new EnsResolutionException("Data is null");
         }
-        if (!url.contains("{sender}")) {
-            throw new EnsResolutionException("Url is not valid, sender parameter is not exist");
-        }
 
         // URL expansion
-        String href = url.replace("{sender}", sender).replace("{data}", data);
+        String href = url;
+
+        if (url.contains("{sender}")) {
+            href = href.replace("{sender}", sender);
+        }
+
+        if (url.contains("{data}")) {
+            href = href.replace("{data}", data);
+        }
 
         Request.Builder builder = new Request.Builder().url(href);
 
+        // According to ERC-3668:
+        // - If URL contains {data}, use GET
+        // - Otherwise, use POST with JSON payload containing data and sender
         if (url.contains("{data}")) {
             return builder.get().build();
         } else {
-            EnsGatewayRequestDTO requestDTO = new EnsGatewayRequestDTO(data);
+            EnsGatewayRequestDTO requestDTO = new EnsGatewayRequestDTO(data, sender);
             ObjectMapper om = ObjectMapperFactory.getObjectMapper();
 
             return builder.post(RequestBody.create(om.writeValueAsString(requestDTO), JSON))
