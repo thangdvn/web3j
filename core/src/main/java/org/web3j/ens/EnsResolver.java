@@ -263,10 +263,11 @@ public class EnsResolver {
             EnsGatewayResponseDTO gatewayResponseDTO =
                     objectMapper.readValue(gatewayResult, EnsGatewayResponseDTO.class);
             String callbackSelector = Numeric.toHexString(offchainLookup.getCallbackFunction());
-            List<Type> parameters = Arrays.asList(
-                    new DynamicBytes(Numeric.hexStringToByteArray(gatewayResponseDTO.getData())),
-                    new DynamicBytes(offchainLookup.getExtraData())
-            );
+            List<Type> parameters =
+                    Arrays.asList(
+                            new DynamicBytes(
+                                    Numeric.hexStringToByteArray(gatewayResponseDTO.getData())),
+                            new DynamicBytes(offchainLookup.getExtraData()));
 
             String encodedParams = new DefaultFunctionEncoder().encodeParameters(parameters);
             String encodedFunction = callbackSelector + encodedParams;

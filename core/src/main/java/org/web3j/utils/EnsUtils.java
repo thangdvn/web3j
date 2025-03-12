@@ -30,7 +30,7 @@ public class EnsUtils {
         }
 
         return EnsUtils.EIP_3668_CCIP_INTERFACE_ID.equals(
-            Numeric.removeDoubleQuotes(data).substring(0, 10));
+                Numeric.removeDoubleQuotes(data).substring(0, 10));
     }
 
     public static String getParent(String url) {

@@ -65,14 +65,14 @@ class EnsUtilsTest {
 
         String validDataWithQuotes = "\"0x556f1830abcdef1234567890\"";
         assertTrue(EnsUtils.isEIP3668(validDataWithQuotes));
-        
+
         // Invalid EIP3668 data - different interface ID
         String invalidData = "0x123456789abcdef1234567890";
         assertFalse(EnsUtils.isEIP3668(invalidData));
 
         String invalidDataWithQuotes = "\"0x123456789abcdef1234567890\"";
         assertFalse(EnsUtils.isEIP3668(invalidDataWithQuotes));
-        
+
         // Edge cases
         assertFalse(EnsUtils.isEIP3668(null));
         assertFalse(EnsUtils.isEIP3668(""));

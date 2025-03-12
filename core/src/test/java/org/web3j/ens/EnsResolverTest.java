@@ -288,7 +288,7 @@ class EnsResolverTest {
         data = "0xd5fa2b00";
 
         okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
-        
+
         assertEquals("https://example.com/gateway/0xd5fa2b00.json", request.url().toString());
         assertEquals("GET", request.method());
         assertNull(request.body());
@@ -301,8 +301,9 @@ class EnsResolverTest {
         data = "0xd5fa2b00";
 
         okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
-        
-        assertEquals("https://example.com/gateway/0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8/lookup", 
+
+        assertEquals(
+                "https://example.com/gateway/0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8/lookup",
                 request.url().toString());
         assertEquals("POST", request.method());
         assertNotNull(request.body());
@@ -329,8 +330,9 @@ class EnsResolverTest {
         data = "0xd5fa2b00";
 
         okhttp3.Request request = ensResolver.buildRequest(url, sender, data);
-        
-        assertEquals("https://example.com/gateway/0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8/0xd5fa2b00", 
+
+        assertEquals(
+                "https://example.com/gateway/0x226159d592E2b063810a10Ebf6dcbADA94Ed68b8/0xd5fa2b00",
                 request.url().toString());
         assertEquals("GET", request.method());
         assertNull(request.body());
@@ -492,7 +494,8 @@ class EnsResolverTest {
                         buildResponse(200, urls.get(0), sender, data));
 
         String eip3668Data = EnsUtils.EIP_3668_CCIP_INTERFACE_ID + "data";
-        when(resolver.executeCallWithoutDecoding(any())).thenReturn(eip3668Data, eip3668Data, eip3668Data);
+        when(resolver.executeCallWithoutDecoding(any()))
+                .thenReturn(eip3668Data, eip3668Data, eip3668Data);
 
         assertThrows(
                 EnsResolutionException.class,
@@ -514,18 +517,21 @@ class EnsResolverTest {
 
         // Create a custom LOOKUP_HEX with a different callback function
         String customCallbackSelector = "aabbccdd";
-        String customLookupHex = LOOKUP_HEX.substring(0, 202) + customCallbackSelector + LOOKUP_HEX.substring(210);
-        
+        String customLookupHex =
+                LOOKUP_HEX.substring(0, 202) + customCallbackSelector + LOOKUP_HEX.substring(210);
+
         // Capture the function call to verify the correct callback selector is used
         ArgumentCaptor<String> functionCallCaptor = ArgumentCaptor.forClass(String.class);
-        when(resolver.executeCallWithoutDecoding(functionCallCaptor.capture())).thenReturn(RESOLVED_NAME_HEX);
+        when(resolver.executeCallWithoutDecoding(functionCallCaptor.capture()))
+                .thenReturn(RESOLVED_NAME_HEX);
 
         String result = ensResolver.resolveOffchain(customLookupHex, resolver, 4);
         assertEquals("0x41563129cdbbd0c5d3e1c86cf9563926b243834d", result);
-        
+
         // Verify that the captured function call starts with our custom callback selector
         String capturedFunctionCall = functionCallCaptor.getValue();
-        assertTrue(capturedFunctionCall.startsWith("0x" + customCallbackSelector),
+        assertTrue(
+                capturedFunctionCall.startsWith("0x" + customCallbackSelector),
                 "Function call should start with the custom callback selector");
     }
 
@@ -541,27 +547,30 @@ class EnsResolverTest {
 
         EnsGatewayResponseDTO responseDTO = new EnsGatewayResponseDTO(testData);
         String responseJson = om.writeValueAsString(responseDTO);
-        
-        okhttp3.Response responseObj = new okhttp3.Response.Builder()
-                .request(new okhttp3.Request.Builder().url(urls.get(0)).build())
-                .protocol(Protocol.HTTP_2)
-                .code(200)
-                .body(ResponseBody.create(responseJson, JSON_MEDIA_TYPE))
-                .message("OK")
-                .build();
-                
+
+        okhttp3.Response responseObj =
+                new okhttp3.Response.Builder()
+                        .request(new okhttp3.Request.Builder().url(urls.get(0)).build())
+                        .protocol(Protocol.HTTP_2)
+                        .code(200)
+                        .body(ResponseBody.create(responseJson, JSON_MEDIA_TYPE))
+                        .message("OK")
+                        .build();
+
         ensResolver.setHttpClient(httpClientMock);
         when(httpClientMock.newCall(any())).thenReturn(call);
         when(call.execute()).thenReturn(responseObj);
 
         ArgumentCaptor<String> functionCallCaptor = ArgumentCaptor.forClass(String.class);
-        when(resolver.executeCallWithoutDecoding(functionCallCaptor.capture())).thenReturn(RESOLVED_NAME_HEX);
+        when(resolver.executeCallWithoutDecoding(functionCallCaptor.capture()))
+                .thenReturn(RESOLVED_NAME_HEX);
 
         String result = ensResolver.resolveOffchain(LOOKUP_HEX, resolver, 4);
         assertEquals("0x41563129cdbbd0c5d3e1c86cf9563926b243834d", result);
 
         String capturedFunctionCall = functionCallCaptor.getValue();
-        assertTrue(capturedFunctionCall.contains(testData.substring(2)), 
+        assertTrue(
+                capturedFunctionCall.contains(testData.substring(2)),
                 "Function call should contain the encoded test data");
     }
 
