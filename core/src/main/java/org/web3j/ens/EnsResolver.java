@@ -30,7 +30,10 @@ import okhttp3.ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.web3j.abi.DefaultFunctionEncoder;
 import org.web3j.abi.DefaultFunctionReturnDecoder;
+import org.web3j.abi.datatypes.DynamicBytes;
+import org.web3j.abi.datatypes.Type;
 import org.web3j.abi.datatypes.ens.OffchainLookup;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.Keys;
@@ -259,12 +262,15 @@ public class EnsResolver {
             ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
             EnsGatewayResponseDTO gatewayResponseDTO =
                     objectMapper.readValue(gatewayResult, EnsGatewayResponseDTO.class);
+            String callbackSelector = Numeric.toHexString(offchainLookup.getCallbackFunction());
+            List<Type> parameters = Arrays.asList(
+                    new DynamicBytes(Numeric.hexStringToByteArray(gatewayResponseDTO.getData())),
+                    new DynamicBytes(offchainLookup.getExtraData())
+            );
 
-            String resolvedNameHex =
-                    resolver.resolveWithProof(
-                                    Numeric.hexStringToByteArray(gatewayResponseDTO.getData()),
-                                    offchainLookup.getExtraData())
-                            .send();
+            String encodedParams = new DefaultFunctionEncoder().encodeParameters(parameters);
+            String encodedFunction = callbackSelector + encodedParams;
+            String resolvedNameHex = resolver.executeCallWithoutDecoding(encodedFunction);
 
             // This protocol can result in multiple lookups being requested by the same contract.
             if (EnsUtils.isEIP3668(resolvedNameHex)) {
