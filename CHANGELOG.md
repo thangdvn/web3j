@@ -3,11 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [4.13.1]() (2025-03-05)
+# [4.14.0]() (Upcoming)
 
 ### Bug Fixes
 
-* 
+* fix: ENS CCIP Read improvements [#2164](https://github.com/LFDT-web3j/web3j/pull/2164)
+
+
 ### Features
 
 * bump snapshot version to 4.13.1 [#2160](https://github.com/hyperledger-web3j/web3j/pull/2160)
