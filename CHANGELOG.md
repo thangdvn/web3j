@@ -17,7 +17,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### BREAKING CHANGES
 
-*
+* Upgrade to Java 21 and Besu 25.2.1 [#2165](https://github.com/LFDT-web3j/web3j/pull/2165)
 
 # [4.13.0](https://github.com/hyperledger-web3j/web3j/releases/tag/v4.13.0) (2025-03-05)
 
