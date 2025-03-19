@@ -7,6 +7,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
+* update copyright year to 2025 [#2152](https://github.com/LFDT-web3j/web3j/pull/2152)
 * fix: ENS CCIP Read improvements [#2164](https://github.com/LFDT-web3j/web3j/pull/2164)
 
 
