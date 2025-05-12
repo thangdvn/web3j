@@ -43,6 +43,7 @@ public class Transaction {
     private String maxFeePerGas;
     private String maxPriorityFeePerGas;
     private List<AccessListObject> accessList;
+    private List<AuthorizationObject> authorizationList;
     private String maxFeePerBlobGas;
     private List<String> blobVersionedHashes;
 
@@ -193,6 +194,60 @@ public class Transaction {
         this.maxFeePerGas = maxFeePerGas;
         this.maxPriorityFeePerGas = maxPriorityFeePerGas;
         this.accessList = accessList;
+        this.maxFeePerBlobGas = maxFeePerBlobGas;
+        this.blobVersionedHashes = versionedHashes;
+    }
+    public Transaction(
+        String hash,
+        String nonce,
+        String blockHash,
+        String blockNumber,
+        String chainId,
+        String transactionIndex,
+        String from,
+        String to,
+        String value,
+        String gas,
+        String gasPrice,
+        String input,
+        String creates,
+        String publicKey,
+        String raw,
+        String r,
+        String s,
+        long v,
+        String yParity,
+        String type,
+        String maxFeePerGas,
+        String maxPriorityFeePerGas,
+        List accessList,
+        List<AuthorizationObject> authorizationList,
+        String maxFeePerBlobGas,
+        List versionedHashes) {
+        this.hash = hash;
+        this.nonce = nonce;
+        this.blockHash = blockHash;
+        this.blockNumber = blockNumber;
+        this.chainId = chainId;
+        this.transactionIndex = transactionIndex;
+        this.from = from;
+        this.to = to;
+        this.value = value;
+        this.gasPrice = gasPrice;
+        this.gas = gas;
+        this.input = input;
+        this.creates = creates;
+        this.publicKey = publicKey;
+        this.raw = raw;
+        this.r = r;
+        this.s = s;
+        this.v = v;
+        this.yParity = yParity;
+        this.type = type;
+        this.maxFeePerGas = maxFeePerGas;
+        this.maxPriorityFeePerGas = maxPriorityFeePerGas;
+        this.accessList = accessList;
+        this.authorizationList = authorizationList;
         this.maxFeePerBlobGas = maxFeePerBlobGas;
         this.blobVersionedHashes = versionedHashes;
     }
@@ -435,6 +490,14 @@ public class Transaction {
 
     public void setAccessList(List<AccessListObject> accessList) {
         this.accessList = accessList;
+    }
+
+    public List<AuthorizationObject> getAuthorizationList() {
+        return authorizationList;
+    }
+
+    public void setAuthorizationList(List<AuthorizationObject> authorizationList) {
+        this.authorizationList = authorizationList;
     }
 
     public String getMaxFeePerBlobGasRaw() {
