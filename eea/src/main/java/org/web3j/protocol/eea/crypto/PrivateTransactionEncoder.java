@@ -65,7 +65,10 @@ public class PrivateTransactionEncoder {
         final RlpList rlpList = new RlpList(values);
         byte[] encoded = RlpEncoder.encode(rlpList);
 
-        if (privateTransaction.getType().isEip1559()) {
+        if (privateTransaction.getType().isEip1559()
+            || privateTransaction.getType().isEip2930()
+            || privateTransaction.getType().isEip4844()
+            || privateTransaction.getType().isEip7702()) {
             return ByteBuffer.allocate(encoded.length + 1)
                     .put(privateTransaction.getType().getRlpType())
                     .put(encoded)

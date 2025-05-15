@@ -59,7 +59,10 @@ public class TransactionEncoder {
             RawTransaction rawTransaction, long chainId, Credentials credentials) {
 
         // Eip1559: Tx has ChainId inside
-        if (rawTransaction.getType().isEip1559()) {
+        if (rawTransaction.getType().isEip1559()
+            || rawTransaction.getType().isEip2930()
+            || rawTransaction.getType().isEip4844()
+            || rawTransaction.getType().isEip7702()) {
             return signMessage(rawTransaction, credentials);
         }
 
