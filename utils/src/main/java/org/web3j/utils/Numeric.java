@@ -35,7 +35,7 @@ public final class Numeric {
         if (value.signum() != -1) {
             return HEX_PREFIX + value.toString(16);
         } else {
-            throw new MessageEncodingException("Negative values are not supported");
+            throw new MessageEncodingException("Negative values are not supported " + value);
         }
     }
 
@@ -45,13 +45,13 @@ public final class Numeric {
         }
 
         if (!isValidHexQuantity(value)) {
-            throw new MessageDecodingException("Value must be in format 0x[0-9a-fA-F]+");
+            throw new MessageDecodingException("Value must be in format 0x[0-9a-fA-F]+ " + value);
         }
 
         try {
             return parsePaddedNumberHex(value);
         } catch (NumberFormatException e) {
-            throw new MessageDecodingException("Negative ", e);
+            throw new MessageDecodingException("Negative " + value, e);
         }
     }
 
@@ -164,9 +164,9 @@ public final class Numeric {
         int length = result.length();
         if (length > size) {
             throw new UnsupportedOperationException(
-                    "Value " + result + "is larger then length " + size);
+                    "Value " + result + "is larger then length " + size + " " + value);
         } else if (value.signum() < 0) {
-            throw new UnsupportedOperationException("Value cannot be negative");
+            throw new UnsupportedOperationException("Value cannot be negative " + value);
         }
 
         if (length < size) {
@@ -195,7 +195,7 @@ public final class Numeric {
         }
 
         if (bytesLength > length) {
-            throw new RuntimeException("Input is too large to put in byte array of size " + length);
+            throw new RuntimeException("Input is too large to put in byte array of size " + length + " " + value);
         }
 
         int destOffset = length - bytesLength;
