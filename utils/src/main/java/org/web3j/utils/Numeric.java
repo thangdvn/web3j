@@ -45,7 +45,11 @@ public final class Numeric {
         }
 
         if (!isValidHexQuantity(value)) {
-            throw new MessageDecodingException("Value must be in format 0x[0-9a-fA-F]+ " + value);
+            try {
+                return new BigInteger(value);
+            } catch (NumberFormatException e) {
+                throw new MessageDecodingException("Value must be in format 0x[0-9a-fA-F]+ " + value);
+            }
         }
 
         try {
