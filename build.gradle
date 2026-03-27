@@ -10,7 +10,8 @@ plugins {
     id 'org.ajoberstar.git-publish' version '3.0.1'
 }
 
-
+// gradlew build -x spotlessJava -x test
+// cd IdeaProjects/web3j && ./gradlew publishToMavenLocal -x signMavenPublication
 
 ext {
     bouncycastleVersion = '1.80'
